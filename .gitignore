@@ -1,0 +1,21 @@
+# Node modules
+node_modules/
+
+# Environment files
+.env
+client/.env
+server/.env
+
+# Build directories
+dist/
+build/
+client/build/
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
