@@ -6,7 +6,7 @@ const DiseaseCard = ({ name, description, treatment, symptoms, complications, di
   const formatObjectData = (data, title) => (
     typeof data === 'object' && data !== null ? (
       <div className="card p-3 mt-2 bg-light border-left">  
-        <ul className="list-group list-group-flush">
+        <ul className="">
           {Object.entries(data).map(([key, value], index) => (
             <li key={key} className="list-group-item">
             <strong>{String.fromCharCode(97 + index)}) {key.replace(/_/g, ' ')}:</strong>
@@ -37,7 +37,7 @@ const DiseaseCard = ({ name, description, treatment, symptoms, complications, di
 
       <div><strong>4) Symptoms:</strong> 
 
-        <ul className="list-group">
+        <ul className="">
           {Array.isArray(symptoms) && symptoms.length > 0 ? symptoms.map((symptom, index) => (
 
             <li key={index} className="list-group-item">
@@ -49,7 +49,7 @@ const DiseaseCard = ({ name, description, treatment, symptoms, complications, di
       </div>
       <div><strong>5) Complications:</strong> 
 
-        <ul className="list-group">
+        <ul className="">
           {Array.isArray(complications) && complications.length > 0 ? complications.map((complication, index) => (
 
             <li key={index} className="list-group-item">

@@ -52,10 +52,10 @@ const ClinicalAccess = () => {
           <p>No matching results found.</p>
         )}
       </div>
-      <div className="container categorized mt-4">
+      <div className="container categorized mt-4" id="cart-div">
         <div className="card">
         <h3 className="text-center" style={{paddingTop:25}}>Categorized Data</h3>
-          <div className="card-body">
+          <div className="card-body bg-none">
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
                 <a href="/" className="text-decoration-none text-primary">Family history based diseases</a>

@@ -14,7 +14,7 @@ const App = () => {
   // Check for user in localStorage to set authentication state
   const [user, setUser] = useState(null);
   //console.log(DrugsInfo);
-  
+
   useEffect(() => {
     const userInfo = localStorage.getItem('userInfo');
     if (userInfo) {
@@ -30,30 +30,30 @@ const App = () => {
   return (
     <Router>
       <NavBar user={user} setUser={setUser} />
-      <div className='container-fluid' style={{ padding: '20px' }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/drugs" element={<Drugs />} />
-          <Route path="/disease" element={<Disease />} />
-          <Route path="/pregnancy" element={<Pregnancy />} />
-          <Route path="/login" element={<Login setUser={setUser} />} />
-          <Route path="/clinical/filling" element={
-            <ProtectedRoute>
-              <ClinicalFilling />
-            </ProtectedRoute>
-          }/>
-          <Route path="/clinical/access" element={
-            <ProtectedRoute>
-              <ClinicalAccess />
-            </ProtectedRoute>
-          }/>
-          <Route path="/common-illness" element={
-            <ProtectedRoute>
-              <CommonIllness />
-            </ProtectedRoute>
-          }/>
-        </Routes>
-      </div>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/drugs" element={<Drugs />} />
+        <Route path="/disease" element={<Disease />} />
+        <Route path="/pregnancy" element={<Pregnancy />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/clinical/filling" element={
+          <ProtectedRoute>
+            <ClinicalFilling />
+          </ProtectedRoute>
+        } />
+        <Route path="/clinical/access" element={
+          <ProtectedRoute>
+            <ClinicalAccess />
+          </ProtectedRoute>
+        } />
+        <Route path="/common-illness" element={
+          <ProtectedRoute>
+            <CommonIllness />
+          </ProtectedRoute>
+        } />
+      </Routes>
+
     </Router>
   );
 };

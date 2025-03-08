@@ -1,0 +1,40 @@
+/* Navbar Background */
+.navbar {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+}
+
+/* Navbar Brand Text */
+.navbar-brand {
+    font-size: 1.5rem;
+    color: #fff !important;
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+    color: #fff !important;
+    font-size: 1.1rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #f8f9fa !important;
+    text-decoration: underline;
+}
+
+/* Navbar Toggler */
+.navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Responsive Nav Padding */
+@media (max-width: 991px) {
+    .navbar-nav {
+        text-align: center;
+        padding-top: 10px;
+    }
+}

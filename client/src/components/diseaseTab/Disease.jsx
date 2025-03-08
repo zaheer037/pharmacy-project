@@ -7,7 +7,7 @@ const Disease = () => {
   return (
     <div className="container disease-container">
       {DiseaseInfo.map((category, categoryIndex) => (
-        <div key={category.id} className="disease-category">
+        <div key={category.id} className="disease-category ">
           <h2>{categoryIndex + 1}. {category.name}</h2>
           {category.diseases.map((disease, diseaseIndex) => (
             <DiseaseCard

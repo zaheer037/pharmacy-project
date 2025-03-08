@@ -1,9 +1,9 @@
 // PregnancyCard.jsx
 import React from "react";
-
+//import "./pregnancy.css";
 const PregnancyCard = ({ title, description, examples }) => {
   return (
-    <div className="card shadow-sm border-0 mb-3">
+    <div className="card shadow-sm border-0 mb-3 image-container" >
       <div className="card-body">
         <h2 className="card-title h5 text-primary">{title}</h2>
         <p className="card-text text-muted">{description}</p>
