@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
-import Drugs from './components/Drugs';
-import Disease from './components/Disease';
-import Pregnancy from './components/Pregnancy';
+import Drugs from './components/drugsTab/Drugs';
+import Disease from './components/diseaseTab/Disease';
+import Pregnancy from './components/pregnancyTab/Pregnancy';
 import Login from './components/Login';
 import ClinicalFilling from './components/ClinicalFiliing';
 import ClinicalAccess from './components/ClinicalAccess';
+import CommonIllness from './components/commonTab/CommonIllness';
 
 const App = () => {
   // Check for user in localStorage to set authentication state
   const [user, setUser] = useState(null);
+  //console.log(DrugsInfo);
+  
   useEffect(() => {
     const userInfo = localStorage.getItem('userInfo');
     if (userInfo) {
@@ -42,6 +45,11 @@ const App = () => {
           <Route path="/clinical/access" element={
             <ProtectedRoute>
               <ClinicalAccess />
+            </ProtectedRoute>
+          }/>
+          <Route path="/common-illness" element={
+            <ProtectedRoute>
+              <CommonIllness />
             </ProtectedRoute>
           }/>
         </Routes>

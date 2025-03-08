@@ -14,16 +14,16 @@ const NavBar = ({ user, setUser }) => {
   const publicNav = (
     <>
       <li className="nav-item">
-        <Link to="/drugs" className="nav-link">Drugs Info</Link>
+        <Link to="/drugs" className="nav-link"><i class="fa-solid fa-pills"></i> Drugs Info</Link>
       </li>
       <li className="nav-item">
-        <Link to="/disease" className="nav-link">Disease & Treatment</Link>
+        <Link to="/disease" className="nav-link"><i class="fa-solid fa-stethoscope"></i> Disease & Treatment</Link>
       </li>
       <li className="nav-item">
-        <Link to="/pregnancy" className="nav-link">Pregnancy & Breastfeeding</Link>
+        <Link to="/pregnancy" className="nav-link"><i class="fa-solid fa-person-pregnant"></i> Pregnancy & Breastfeeding</Link>
       </li>
       <li className="nav-item">
-        <Link to="/login" className="nav-link">Login</Link>
+        <Link to="/login" className="nav-link"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</Link>
       </li>
     </>
   );
@@ -32,22 +32,25 @@ const NavBar = ({ user, setUser }) => {
   const privateNav = (
     <>
       <li className="nav-item">
-        <Link to="/drugs" className="nav-link">Drugs Info</Link>
+        <Link to="/drugs" className="nav-link"><i class="fa-solid fa-pills"></i> Drugs Info</Link>
       </li>
       <li className="nav-item">
-        <Link to="/disease" className="nav-link">Disease & Treatment</Link>
+        <Link to="/common-illness" className="nav-link"><i class="fa-solid fa-temperature-high"></i> Common Illness</Link>
       </li>
       <li className="nav-item">
-        <Link to="/pregnancy" className="nav-link">Pregnancy & Breastfeeding</Link>
+        <Link to="/disease" className="nav-link"><i class="fa-solid fa-stethoscope"></i> Disease & Treatment</Link>
       </li>
       <li className="nav-item">
-        <Link to="/clinical/filling" className="nav-link">Clinical Data Filling</Link>
+        <Link to="/pregnancy" className="nav-link"><i class="fa-solid fa-person-pregnant"></i> Pregnancy & Breastfeeding</Link>
       </li>
       <li className="nav-item">
-        <Link to="/clinical/access" className="nav-link">Clinical Data Access</Link>
+        <Link to="/clinical/filling" className="nav-link"><i class="fa-solid fa-user-doctor"></i> Clinical Data Filling</Link>
       </li>
       <li className="nav-item">
-        <button onClick={handleLogout} className="btn btn-outline-danger ms-3">Logout</button>
+        <Link to="/clinical/access" className="nav-link"><i class="fa-solid fa-calendar-plus"></i> Clinical Data Access</Link>
+      </li>
+      <li className="nav-item">
+        <button onClick={handleLogout} className="btn btn-outline-danger ms-3"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
       </li>
     </>
   );
@@ -55,7 +58,7 @@ const NavBar = ({ user, setUser }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light mb-3">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand">MERN Project</Link>
+        <Link to="/" className="navbar-brand">Disease Prediction</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
