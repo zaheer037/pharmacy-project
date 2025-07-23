@@ -9,6 +9,7 @@ import Login from './components/Login';
 import ClinicalFilling from './components/ClinicalFiliing';
 import ClinicalAccess from './components/ClinicalAccess';
 import CommonIllness from './components/commonTab/CommonIllness';
+import './App.css';
 
 const App = () => {
   // Check for user in localStorage to set authentication state
@@ -28,33 +29,35 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <NavBar user={user} setUser={setUser} />
+    <div className="app-container">
+      <Router>
+        <NavBar user={user} setUser={setUser} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/drugs" element={<Drugs />} />
-        <Route path="/disease" element={<Disease />} />
-        <Route path="/pregnancy" element={<Pregnancy />} />
-        <Route path="/login" element={<Login setUser={setUser} />} />
-        <Route path="/clinical/filling" element={
-          <ProtectedRoute>
-            <ClinicalFilling />
-          </ProtectedRoute>
-        } />
-        <Route path="/clinical/access" element={
-          <ProtectedRoute>
-            <ClinicalAccess />
-          </ProtectedRoute>
-        } />
-        <Route path="/common-illness" element={
-          <ProtectedRoute>
-            <CommonIllness />
-          </ProtectedRoute>
-        } />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/drugs" element={<Drugs />} />
+          <Route path="/disease" element={<Disease />} />
+          <Route path="/pregnancy" element={<Pregnancy />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route path="/clinical/filling" element={
+            <ProtectedRoute>
+              <ClinicalFilling />
+            </ProtectedRoute>
+          } />
+          <Route path="/clinical/access" element={
+            <ProtectedRoute>
+              <ClinicalAccess />
+            </ProtectedRoute>
+          } />
+          <Route path="/common-illness" element={
+            <ProtectedRoute>
+              <CommonIllness />
+            </ProtectedRoute>
+          } />
+        </Routes>
 
-    </Router>
+      </Router>
+    </div>
   );
 };
 

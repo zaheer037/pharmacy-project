@@ -1,40 +1,148 @@
-/* Navbar Background */
-.navbar {
-    background: linear-gradient(135deg, #007bff, #0056b3);
+/* Modern Navigation Bar Styles */
+.modern-navbar {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0.5rem 0; /* Reduced padding */
+  min-height: 60px; /* Fixed height */
 }
 
-/* Navbar Brand Text */
-.navbar-brand {
-    font-size: 1.5rem;
-    color: #fff !important;
+.navbar-brand-modern {
+  font-weight: 700;
+  font-size: 1.4rem; /* Slightly smaller */
+  background: linear-gradient(135deg, #2c5282, #4fd1c7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  margin-right: 2rem; /* Add margin for better spacing */
 }
 
-/* Navbar Links */
-.navbar-nav .nav-link {
-    color: #fff !important;
-    font-size: 1.1rem;
-    transition: color 0.3s ease-in-out;
+.navbar-brand-modern:hover {
+  transform: scale(1.05);
 }
 
-.navbar-nav .nav-link:hover {
-    color: #f8f9fa !important;
-    text-decoration: underline;
+.nav-link-modern {
+  position: relative;
+  padding: 6px 12px !important; /* Reduced padding */
+  margin: 0 2px; /* Reduced margin */
+  border-radius: 6px; /* Smaller border radius */
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #4a5568 !important;
+  text-decoration: none;
+  font-size: 0.9rem; /* Slightly smaller font */
+  white-space: nowrap; /* Prevent text wrapping */
 }
 
-/* Navbar Toggler */
+.nav-link-modern:hover {
+  background: rgba(44, 82, 130, 0.1);
+  color: #2c5282 !important;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.nav-link-modern i {
+  margin-right: 4px; /* Reduced icon margin */
+  transition: all 0.3s ease;
+  font-size: 0.85rem; /* Smaller icons */
+}
+
+.nav-link-modern:hover i {
+  transform: scale(1.1);
+}
+
+.logout-btn-modern {
+  background: linear-gradient(135deg, #f56565, #e53e3e) !important;
+  border: none !important;
+  border-radius: 15px !important; /* Smaller border radius */
+  padding: 6px 16px !important; /* Reduced padding */
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: white !important;
+  font-size: 0.9rem; /* Smaller font */
+}
+
+.logout-btn-modern:hover {
+  background: linear-gradient(135deg, #e53e3e, #c53030) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 101, 101, 0.4);
+}
+
 .navbar-toggler {
-    border: none;
-    outline: none;
+  border: none;
+  padding: 4px 8px;
 }
 
 .navbar-toggler:focus {
-    box-shadow: none;
+  box-shadow: none;
 }
 
-/* Responsive Nav Padding */
-@media (max-width: 991px) {
-    .navbar-nav {
-        text-align: center;
-        padding-top: 10px;
-    }
+/* Compact navbar items layout */
+.navbar-nav {
+  align-items: center;
+  gap: 0.2rem; /* Add small gap between items */
+}
+
+.nav-item {
+  margin: 0; /* Remove default margins */
+}
+
+/* Two-row layout for private nav on medium screens */
+@media (min-width: 992px) and (max-width: 1200px) {
+  .navbar-nav {
+    flex-wrap: wrap;
+    max-width: 600px;
+    justify-content: flex-end;
+  }
+  
+  .nav-item {
+    flex: 0 0 auto;
+    margin: 2px;
+  }
+  
+  .nav-link-modern {
+    padding: 4px 8px !important;
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .modern-navbar {
+    padding: 8px 16px;
+  }
+  
+  .navbar-brand-modern {
+    font-size: 1.2rem;
+  }
+  
+  .nav-link-modern {
+    margin: 4px 0;
+    padding: 8px 12px !important;
+  }
+  
+  .logout-btn-modern {
+    margin-top: 8px;
+    width: 100%;
+  }
+}
+
+/* Ultra-wide screens - spread items more */
+@media (min-width: 1400px) {
+  .nav-link-modern {
+    padding: 8px 16px !important;
+    margin: 0 4px;
+    font-size: 1rem;
+  }
+  
+  .navbar-brand-modern {
+    font-size: 1.5rem;
+  }
 }
