@@ -289,6 +289,30 @@ const DiseaseInfo =[
             "Beta-agonists (short-acting and long-acting)",
             "Leukotriene modifiers"
           ]
+        },
+        {
+          "id": 3,
+          "name": "Pneumonia",
+          "Pathophysiology": "Infection of the lung parenchyma causing inflammation and fluid accumulation in alveoli.",
+          "Clinical_Features": [
+            "Fever and chills",
+            "Productive cough with purulent sputum",
+            "Pleuritic chest pain",
+            "Dyspnea",
+            "Fatigue"
+          ],
+          "Diagnostic_Approach": [
+            "Chest X-ray",
+            "Complete blood count",
+            "Sputum culture",
+            "Blood cultures"
+          ],
+          "Treatment": [
+            "Antibiotics (amoxicillin, azithromycin)",
+            "Supportive care",
+            "Oxygen therapy if needed",
+            "Hospitalization for severe cases"
+          ]
         }
       ]
     },
@@ -335,6 +359,28 @@ const DiseaseInfo =[
           ],
           "Treatment": [
             "Levothyroxine"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Hyperthyroidism",
+          "Pathophysiology": "Excess thyroid hormone production leading to hypermetabolic state.",
+          "Clinical_Features": [
+            "Weight loss despite increased appetite",
+            "Heat intolerance",
+            "Tachycardia",
+            "Tremor",
+            "Anxiety"
+          ],
+          "Diagnostic_Approach": [
+            "Low TSH",
+            "Elevated T3/T4 levels",
+            "Thyroid uptake scan"
+          ],
+          "Treatment": [
+            "Antithyroid medications (methimazole)",
+            "Beta-blockers for symptoms",
+            "Radioactive iodine therapy"
           ]
         }
       ]
@@ -383,6 +429,30 @@ const DiseaseInfo =[
             "H. pylori eradication (triple therapy)",
             "Avoid NSAIDs"
           ]
+        },
+        {
+          "id": 3,
+          "name": "Inflammatory Bowel Disease (IBD)",
+          "Pathophysiology": "Chronic inflammatory condition affecting the GI tract (Crohn's disease and Ulcerative colitis).",
+          "Clinical_Features": [
+            "Chronic diarrhea",
+            "Abdominal pain",
+            "Weight loss",
+            "Blood in stool",
+            "Fatigue"
+          ],
+          "Diagnostic_Approach": [
+            "Colonoscopy with biopsy",
+            "CT enterography",
+            "Inflammatory markers (CRP, ESR)",
+            "Stool studies"
+          ],
+          "Treatment": [
+            "Anti-inflammatory drugs (5-ASA)",
+            "Immunosuppressants (azathioprine)",
+            "Biologics (infliximab)",
+            "Corticosteroids for flares"
+          ]
         }
       ]
     },
@@ -428,6 +498,30 @@ const DiseaseInfo =[
             "Dopamine agonists",
             "MAO-B inhibitors",
             "Deep brain stimulation"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Stroke (Cerebrovascular Accident)",
+          "Pathophysiology": "Interruption of blood flow to brain tissue causing ischemia or hemorrhage.",
+          "Clinical_Features": [
+            "Sudden onset weakness",
+            "Speech difficulties",
+            "Facial drooping",
+            "Loss of coordination",
+            "Severe headache (hemorrhagic)"
+          ],
+          "Diagnostic_Approach": [
+            "CT scan of head",
+            "MRI brain",
+            "Carotid ultrasound",
+            "ECG and cardiac evaluation"
+          ],
+          "Treatment": [
+            "Thrombolytics (tPA for ischemic stroke)",
+            "Antiplatelet therapy",
+            "Blood pressure management",
+            "Rehabilitation therapy"
           ]
         }
       ]
@@ -479,6 +573,30 @@ const DiseaseInfo =[
               "Diuretics",
               "Statins"
             ]
+          },
+          {
+            "id": 3,
+            "name": "Acute Kidney Injury (AKI)",
+            "Pathophysiology": "Rapid decline in kidney function due to prerenal, intrarenal, or postrenal causes.",
+            "Clinical_Features": [
+              "Oliguria or anuria",
+              "Fluid retention",
+              "Electrolyte imbalances",
+              "Uremic symptoms",
+              "Elevated creatinine"
+            ],
+            "Diagnostic_Approach": [
+              "Serum creatinine monitoring",
+              "Urine output measurement",
+              "Urinalysis",
+              "Renal ultrasound"
+            ],
+            "Treatment": [
+              "Treat underlying cause",
+              "Fluid balance management",
+              "Avoid nephrotoxic drugs",
+              "Dialysis if severe"
+            ]
           }
         ]
     },
@@ -525,6 +643,30 @@ const DiseaseInfo =[
               "Hydroxyurea",
               "Pain management",
               "Blood transfusions for severe crises"
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Thalassemia",
+            "Pathophysiology": "Genetic disorder causing reduced production of hemoglobin chains leading to anemia.",
+            "Clinical_Features": [
+              "Fatigue and weakness",
+              "Pallor",
+              "Growth retardation",
+              "Bone deformities",
+              "Hepatosplenomegaly"
+            ],
+            "Diagnostic_Approach": [
+              "Hemoglobin electrophoresis",
+              "Complete blood count",
+              "Genetic testing",
+              "Family history"
+            ],
+            "Treatment": [
+              "Regular blood transfusions",
+              "Iron chelation therapy",
+              "Folic acid supplementation",
+              "Bone marrow transplant in severe cases"
             ]
           }
         ]
@@ -578,6 +720,30 @@ const DiseaseInfo =[
               "Corticosteroids",
               "Immunosuppressants (azathioprine, mycophenolate)"
             ]
+          },
+          {
+            "id": 3,
+            "name": "Osteoarthritis",
+            "Pathophysiology": "Degenerative joint disease with cartilage breakdown and bone changes.",
+            "Clinical_Features": [
+              "Joint pain worse with activity",
+              "Stiffness after rest",
+              "Reduced range of motion",
+              "Joint crepitus",
+              "Bony enlargement"
+            ],
+            "Diagnostic_Approach": [
+              "X-rays showing joint space narrowing",
+              "Clinical examination",
+              "Exclusion of inflammatory arthritis"
+            ],
+            "Treatment": [
+              "Acetaminophen for pain",
+              "NSAIDs",
+              "Topical analgesics",
+              "Physical therapy",
+              "Joint replacement in severe cases"
+            ]
           }
         ]
     },  
@@ -625,6 +791,30 @@ const DiseaseInfo =[
               "HAART (2 NRTIs + 1 NNRTI/PI/INSTI)",
               "Opportunistic infection prophylaxis"
             ]
+          },
+          {
+            "id": 3,
+            "name": "Pneumonia",
+            "Pathophysiology": "Bacterial, viral, or fungal infection of the lung parenchyma causing inflammation.",
+            "Clinical_Features": [
+              "Fever and chills",
+              "Productive cough",
+              "Shortness of breath",
+              "Chest pain",
+              "Crackles on examination"
+            ],
+            "Diagnostic_Approach": [
+              "Chest X-ray",
+              "Sputum culture",
+              "Complete blood count",
+              "Blood cultures",
+              "CT chest if complicated"
+            ],
+            "Treatment": [
+              "Antibiotics based on pathogen",
+              "Supportive care (oxygen, fluids)",
+              "Pneumococcal and influenza vaccination for prevention"
+            ]
           }
         ]
     },
@@ -670,6 +860,28 @@ const DiseaseInfo =[
               "Topical corticosteroids",
               "Antihistamines",
               "Immunomodulators (tacrolimus)"
+            ]
+          },
+          {
+            "id": 3,
+            "name": "Acne Vulgaris",
+            "Pathophysiology": "Multifactorial disease involving sebaceous gland hyperactivity, follicular hyperkeratinization, and bacterial proliferation.",
+            "Clinical_Features": [
+              "Comedones (blackheads and whiteheads)",
+              "Inflammatory papules and pustules",
+              "Nodules and cysts in severe cases",
+              "Scarring"
+            ],
+            "Diagnostic_Approach": [
+              "Clinical examination",
+              "Assessment of acne severity"
+            ],
+            "Treatment": [
+              "Topical retinoids",
+              "Benzoyl peroxide",
+              "Topical antibiotics",
+              "Oral antibiotics for moderate to severe acne",
+              "Isotretinoin for severe cases"
             ]
           }
         ]

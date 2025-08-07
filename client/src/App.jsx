@@ -9,6 +9,10 @@ import Login from './components/Login';
 import ClinicalFilling from './components/ClinicalFiliing';
 import ClinicalAccess from './components/ClinicalAccess';
 import CommonIllness from './components/commonTab/CommonIllness';
+import PoisonAntidote from './components/toxicityTab/PoisonAntidote';
+import GeneralManagement from './components/toxicityTab/GeneralManagement';
+import MedicolegalAspects from './components/toxicityTab/MedicolegalAspects';
+import TypesOfPoisoning from './components/toxicityTab/TypesOfPoisoning';
 import './App.css';
 
 const App = () => {
@@ -34,10 +38,15 @@ const App = () => {
         <NavBar user={user} setUser={setUser} />
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home user={user} />} />
           <Route path="/drugs" element={<Drugs />} />
           <Route path="/disease" element={<Disease />} />
           <Route path="/pregnancy" element={<Pregnancy />} />
+          <Route path="/toxicity/poison-antidote" element={<PoisonAntidote />} />
+          <Route path="/toxicity/general-management" element={<GeneralManagement />} />
+          <Route path="/toxicity/medicolegal-aspects" element={<MedicolegalAspects />} />
+          <Route path="/toxicity/types-of-poisoning" element={<TypesOfPoisoning />} />
+          <Route path="/common-illness" element={<CommonIllness />} />
           <Route path="/login" element={<Login setUser={setUser} />} />
           <Route path="/clinical/filling" element={
             <ProtectedRoute>
@@ -47,11 +56,6 @@ const App = () => {
           <Route path="/clinical/access" element={
             <ProtectedRoute>
               <ClinicalAccess />
-            </ProtectedRoute>
-          } />
-          <Route path="/common-illness" element={
-            <ProtectedRoute>
-              <CommonIllness />
             </ProtectedRoute>
           } />
         </Routes>

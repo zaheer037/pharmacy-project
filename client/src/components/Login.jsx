@@ -27,7 +27,7 @@ const Login = ({ setUser }) => {
     setIsLoading(true);
     
     try {
-      const { data } = await axios.post('http://localhost:5000/api/auth', formData);
+      const { data } = await axios.post('https://pharmacy-project-1.onrender.com/api/auth', formData);
       localStorage.setItem('userInfo', JSON.stringify(data));
       setUser(data);
       navigate('/');

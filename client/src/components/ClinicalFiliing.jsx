@@ -114,7 +114,7 @@ const ClinicalFilling = () => {
       }
 
       await axios.post(
-        "http://localhost:5000/api/clinical/submit",
+        "https://pharmacy-project-1.onrender.com/api/clinical/submit",
         clinicalData,
         {
           headers: {

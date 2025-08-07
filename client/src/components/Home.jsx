@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.jpg';
 
-const Home = () => {
+const Home = ({ user }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    window.scrollTo(0, 0);
+  };
 
   const features = [
     {
@@ -66,17 +73,20 @@ const Home = () => {
                     <i className="fa-solid fa-pills me-2"></i>
                     Explore Drugs
                   </Link>
-                  <Link to="/login" className="btn btn-outline-primary">
-                    <i className="fa-solid fa-arrow-right-to-bracket me-2"></i>
-                    Healthcare Login
-                  </Link>
+                  <button 
+                    onClick={() => handleNavigation(user ? "/drugs" : "/login")} 
+                    className="btn btn-outline-primary"
+                  >
+                    <i className={`fa-solid ${user ? "fa-pills" : "fa-arrow-right-to-bracket"} me-2`}></i>
+                    {user ? "Browse Medications" : "Healthcare Login"}
+                  </button>
                 </div>
               </div>
             </div>
             <div className="col-lg-6">
               <div className="hero-image">
                 <div className="floating-card">
-                  <i className="fa-solid fa-heartbeat"></i>
+                  <img src={logo} alt="PharmaCare Pro" className="floating-card-logo" />
                   <h3>Healthcare Excellence</h3>
                   <p>Trusted by professionals worldwide</p>
                 </div>
@@ -114,7 +124,7 @@ const Home = () => {
           <div className="row">
             {features.map((feature, index) => (
               <div key={index} className="col-lg-3 col-md-6 mb-4">
-                <Link to={feature.link} className="text-decoration-none">
+                <div className="text-decoration-none" onClick={() => handleNavigation(feature.link)} style={{cursor: 'pointer'}}>
                   <div className="feature-card">
                     <div className="feature-icon" style={{ backgroundColor: feature.color }}>
                       <i className={`fa-solid ${feature.icon}`}></i>
@@ -125,7 +135,7 @@ const Home = () => {
                       <i className="fa-solid fa-arrow-right"></i>
                     </div>
                   </div>
-                </Link>
+                </div>
               </div>
             ))}
           </div>
@@ -141,10 +151,13 @@ const Home = () => {
               <p className="cta-subtitle">
                 Join thousands of healthcare professionals using PharmaCare Pro for better patient outcomes
               </p>
-              <Link to="/login" className="btn btn-primary-modern btn-lg">
-                <i className="fa-solid fa-rocket me-2"></i>
-                Start Your Journey
-              </Link>
+              <button 
+                onClick={() => handleNavigation(user ? "/drugs" : "/login")} 
+                className="btn btn-primary-modern btn-lg"
+              >
+                <i className={`fa-solid ${user ? "fa-pills" : "fa-rocket"} me-2`}></i>
+                {user ? "Explore Medications" : "Start Your Journey"}
+              </button>
             </div>
           </div>
         </div>
@@ -216,6 +229,15 @@ const Home = () => {
           font-size: 3rem;
           color: #4fd1c7;
           margin-bottom: 1rem;
+        }
+
+        .floating-card-logo {
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+          border-radius: 12px;
+          margin-bottom: 1rem;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         @keyframes float {
