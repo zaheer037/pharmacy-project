@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 // Authentication routes
-app.use("/api", authRoutes);
+app.use("/api/auth", authRoutes);
 // Clinical form routes (protected)
 app.use("/api/clinical", clinicalRoutes);
 

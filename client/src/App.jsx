@@ -6,6 +6,7 @@ import Drugs from './components/drugsTab/Drugs';
 import Disease from './components/diseaseTab/Disease';
 import Pregnancy from './components/pregnancyTab/Pregnancy';
 import Login from './components/Login';
+import Register from './components/Register';
 import ClinicalFilling from './components/ClinicalFiliing';
 import ClinicalAccess from './components/ClinicalAccess';
 import CommonIllness from './components/commonTab/CommonIllness';
@@ -48,6 +49,10 @@ const App = () => {
           <Route path="/toxicity/types-of-poisoning" element={<TypesOfPoisoning />} />
           <Route path="/common-illness" element={<CommonIllness />} />
           <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route 
+            path="/register" 
+            element={user ? <Navigate to="/" replace /> : <Register setUser={setUser} />} 
+          />
           <Route path="/clinical/filling" element={
             <ProtectedRoute>
               <ClinicalFilling />

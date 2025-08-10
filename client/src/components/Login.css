@@ -79,6 +79,27 @@
   background-clip: text;
 }
 
+.login-subtitle {
+  text-align: center;
+  color: #4a5568;
+  margin-bottom: 30px;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.register-link {
+  color: #2c5282;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.register-link:hover {
+  color: #4fd1c7;
+  text-decoration: none;
+  transform: translateX(3px);
+}
+
 .form-group-modern {
   position: relative;
   margin-bottom: 1.5rem;

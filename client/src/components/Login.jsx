@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import "./Login.css"
 
 const Login = ({ setUser }) => {
   const [formData, setFormData] = useState({
-    name: '',
-    emailOrPhone: '',
-    password: '',
-    occupation: 'employed'
+    email: '',
+    password: ''
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { name, emailOrPhone, password, occupation } = formData;
+  const { email, password } = formData;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,12 +25,12 @@ const Login = ({ setUser }) => {
     setIsLoading(true);
     
     try {
-      const { data } = await axios.post('https://pharmacy-project-1.onrender.com/api/auth', formData);
+      const { data } = await axios.post('http://localhost:5000/api/auth/login', formData);
       localStorage.setItem('userInfo', JSON.stringify(data));
       setUser(data);
       navigate('/');
     } catch (err) { 
-      setError(err.response?.data?.message || 'Authentication failed');
+      setError(err.response?.data?.message || 'Login failed');
     } finally {
       setIsLoading(false);
     }
@@ -53,27 +51,13 @@ const Login = ({ setUser }) => {
         <form onSubmit={handleSubmit}>
           <div className="form-group-modern">
             <input 
-              type="text"
-              name="name"
-              value={name}
+              type="email"
+              name="email"
+              value={email}
               onChange={handleChange}
               required
               className="form-control-modern form-control-with-icon"
-              placeholder="Your username"
-              disabled={isLoading}
-            />
-            <i className="fa-solid fa-user input-icon"></i>
-          </div>
-
-          <div className="form-group-modern">
-            <input 
-              type="text"
-              name="emailOrPhone"
-              value={emailOrPhone}
-              onChange={handleChange}
-              required
-              className="form-control-modern form-control-with-icon"
-              placeholder="Email or Phone"
+              placeholder="Email address"
               disabled={isLoading}
             />
             <i className="fa-solid fa-envelope input-icon"></i>
@@ -93,20 +77,6 @@ const Login = ({ setUser }) => {
             <i className="fa-solid fa-lock input-icon"></i>
           </div>
 
-          <div className="form-group-modern">
-            <select 
-              name="occupation" 
-              value={occupation} 
-              onChange={handleChange} 
-              className="select-modern"
-              disabled={isLoading}
-            >
-              <option value="employed">Healthcare Professional</option>
-              <option value="student">Medical Student</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
           <button 
             type="submit" 
             className={`btn-login-modern ${isLoading ? 'loading-state' : ''}`}
@@ -118,6 +88,13 @@ const Login = ({ setUser }) => {
 
           <div className="login-footer">
             <p>
+              Don't have an account? 
+              <Link to="/register" className="register-link ms-2">
+                <i className="fa-solid fa-user-plus me-1"></i>
+                Create Account
+              </Link>
+            </p>
+            <p className="mt-2">
               <i className="fa-solid fa-shield-halved me-2"></i>
               Secure healthcare professional access
             </p>
