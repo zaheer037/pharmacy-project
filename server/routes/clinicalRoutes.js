@@ -28,4 +28,19 @@ router.get("/user/:id", protect, async (req, res) => {
   }
 });
 
+// Route to retrieve ALL clinical data for educational sharing
+router.get("/all", protect, async (req, res) => {
+  try {
+    // Get all clinical forms from all users for educational purposes
+    const data = await ClinicalForm.find({})
+      .populate('userId', 'name occupation') // Include submitter info for context
+      .sort({ createdAt: -1 }) // Most recent first
+      .limit(100); // Limit for performance
+    
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving data", error: error.message });
+  }
+});
+
 module.exports = router;
