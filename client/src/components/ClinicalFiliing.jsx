@@ -114,7 +114,7 @@ const ClinicalFilling = () => {
       }
 
       await axios.post(
-        "https://pharmacy-project-1.onrender.com/api/clinical/submit",
+        "http://localhost:5000/api/clinical/submit",
         clinicalData,
         {
           headers: {
@@ -136,6 +136,12 @@ const ClinicalFilling = () => {
   return (
     <div className="container">
       <h1 className="my-4">Clinical Data Filling</h1>
+      
+      <div className="alert alert-info" role="alert">
+        <i className="fas fa-info-circle me-2"></i>
+        <strong>Educational Contribution:</strong> The clinical data you submit will be shared with all registered users for educational purposes. This helps build a community learning resource for medical students and healthcare professionals.
+      </div>
+      
       <form onSubmit={handleSubmit}>
         {/* Basic Information */}
         <h3>Basic Information</h3>

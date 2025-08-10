@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { 
@@ -34,13 +36,13 @@ const ClinicalAccess = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    // Fetch clinical data
+    // Fetch all clinical data for educational sharing
     const fetchClinicalData = async () => {
       setLoading(true);
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
       if (userInfo) {
         try {
-          const response = await axios.get(`https://pharmacy-project-1.onrender.com/api/clinical/user/${userInfo._id}`, {
+          const response = await axios.get(`http://localhost:5000/api/clinical/all`, {
             headers: {
               Authorization: `Bearer ${userInfo.token}`, // Ensure token is included
             },
@@ -84,18 +86,213 @@ const ClinicalAccess = () => {
     }
   });
 
-  // Function to handle downloading entry as JSON
+  // Function to generate and download professional PDF report
   const handleDownload = (entry) => {
-    const dataStr = JSON.stringify(entry, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
+    const pdf = new jsPDF();
+    const pageWidth = pdf.internal.pageSize.width;
+    const pageHeight = pdf.internal.pageSize.height;
     
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `clinical-data-${entry._id || Date.now()}.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Header with logo/branding
+    pdf.setFillColor(13, 110, 253); // Primary blue
+    pdf.rect(0, 0, pageWidth, 25, 'F');
+    
+    // Title
+    pdf.setTextColor(255, 255, 255);
+    pdf.setFontSize(18);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Clinical Data Report', 15, 16);
+    
+    // Subtitle
+    pdf.setFontSize(10);
+    pdf.setFont('helvetica', 'normal');
+    pdf.text('Educational Medical Database - Pharmacy Management System', 15, 21);
+    
+    // Reset text color
+    pdf.setTextColor(0, 0, 0);
+    
+    let yPosition = 35;
+    
+    // Patient Information Section
+    pdf.setFontSize(14);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Patient Information', 15, yPosition);
+    yPosition += 8;
+    
+    // Patient details table
+    const patientData = [
+      ['Age', `${entry.age} years`],
+      ['Sex', entry.sex],
+      ['Height', entry.height || 'Not recorded'],
+      ['Weight', entry.weight || 'Not recorded'],
+      ['Location', entry.placeOfLiving || 'Not recorded'],
+      ['Diagnosis', entry.diseaseDiagnosed || 'Not recorded']
+    ];
+    
+    autoTable(pdf, {
+      startY: yPosition,
+      head: [['Field', 'Value']],
+      body: patientData,
+      theme: 'striped',
+      headStyles: { fillColor: [13, 110, 253], textColor: [255, 255, 255] },
+      margin: { left: 15, right: 15 },
+      styles: { fontSize: 9 }
+    });
+    
+    yPosition = pdf.lastAutoTable.finalY + 10;
+    
+    // Clinical Information Section
+    pdf.setFontSize(14);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Clinical Information', 15, yPosition);
+    yPosition += 8;
+    
+    // Complaints
+    pdf.setFontSize(10);
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Chief Complaints:', 15, yPosition);
+    pdf.setFont('helvetica', 'normal');
+    const complaintsText = entry.complaints || 'No complaints recorded';
+    const splitComplaints = pdf.splitTextToSize(complaintsText, pageWidth - 30);
+    pdf.text(splitComplaints, 15, yPosition + 5);
+    yPosition += 5 + (splitComplaints.length * 4) + 5;
+    
+    // Family History (if exists)
+    if (entry.familyHistory) {
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('Family History:', 15, yPosition);
+      pdf.setFont('helvetica', 'normal');
+      const familyText = pdf.splitTextToSize(entry.familyHistory, pageWidth - 30);
+      pdf.text(familyText, 15, yPosition + 5);
+      yPosition += 5 + (familyText.length * 4) + 5;
+    }
+    
+    // Surgical History (if exists)
+    if (entry.surgicalHistory) {
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('Surgical History:', 15, yPosition);
+      pdf.setFont('helvetica', 'normal');
+      const surgicalText = pdf.splitTextToSize(entry.surgicalHistory, pageWidth - 30);
+      pdf.text(surgicalText, 15, yPosition + 5);
+      yPosition += 5 + (surgicalText.length * 4) + 5;
+    }
+    
+    // Personal History Section (if exists)
+    if (entry.personalHistory) {
+      // Check if we need a new page
+      if (yPosition > pageHeight - 60) {
+        pdf.addPage();
+        yPosition = 20;
+      }
+      
+      pdf.setFontSize(14);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('Personal History', 15, yPosition);
+      yPosition += 8;
+      
+      const personalData = [
+        ['Occupation', entry.personalHistory.occupation || 'Not recorded'],
+        ['Alcohol Consumption', entry.personalHistory.alcohol || 'No'],
+        ['Smoking Habits', entry.personalHistory.smoking || 'No'],
+        ['Substance Abuse', entry.personalHistory.substanceAbuse || 'No'],
+        ['Known Allergies', entry.personalHistory.allergies || 'None'],
+        ['Appetite', entry.personalHistory.appetite || 'Not recorded'],
+        ['Sleep Pattern', entry.personalHistory.sleep || 'Not recorded'],
+        ['Bowel Habits', entry.personalHistory.bowelHabits || 'Not recorded']
+      ];
+      
+      autoTable(pdf, {
+        startY: yPosition,
+        head: [['Aspect', 'Details']],
+        body: personalData,
+        theme: 'striped',
+        headStyles: { fillColor: [13, 110, 253], textColor: [255, 255, 255] },
+        margin: { left: 15, right: 15 },
+        styles: { fontSize: 9 }
+      });
+      
+      yPosition = pdf.lastAutoTable.finalY + 10;
+    }
+    
+    // Medication History (if exists)
+    if (entry.pastMedicalHistory && entry.pastMedicalHistory.length > 0) {
+      // Check if we need a new page
+      if (yPosition > pageHeight - 60) {
+        pdf.addPage();
+        yPosition = 20;
+      }
+      
+      pdf.setFontSize(14);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('Medication History', 15, yPosition);
+      yPosition += 8;
+      
+      const medicationData = entry.pastMedicalHistory.map(med => [med.drug, med.dose]);
+      
+      autoTable(pdf, {
+        startY: yPosition,
+        head: [['Drug Name', 'Dosage']],
+        body: medicationData,
+        theme: 'striped',
+        headStyles: { fillColor: [13, 110, 253], textColor: [255, 255, 255] },
+        margin: { left: 15, right: 15 },
+        styles: { fontSize: 9 }
+      });
+      
+      yPosition = pdf.lastAutoTable.finalY + 10;
+    }
+    
+    // Laboratory Results (if exists)
+    if (entry.labProfile && entry.labProfile.length > 0) {
+      // Check if we need a new page
+      if (yPosition > pageHeight - 60) {
+        pdf.addPage();
+        yPosition = 20;
+      }
+      
+      pdf.setFontSize(14);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('Laboratory Results', 15, yPosition);
+      yPosition += 8;
+      
+      const labData = entry.labProfile.map(lab => [lab.parameter, lab.value]);
+      
+      autoTable(pdf, {
+        startY: yPosition,
+        head: [['Parameter', 'Value']],
+        body: labData,
+        theme: 'striped',
+        headStyles: { fillColor: [13, 110, 253], textColor: [255, 255, 255] },
+        margin: { left: 15, right: 15 },
+        styles: { fontSize: 9 }
+      });
+      
+      yPosition = pdf.lastAutoTable.finalY + 10;
+    }
+    
+    // Footer with submission info
+    const finalY = pdf.internal.pageSize.height - 30;
+    pdf.setFillColor(248, 249, 250); // Light gray
+    pdf.rect(0, finalY, pageWidth, 30, 'F');
+    
+    pdf.setFontSize(8);
+    pdf.setTextColor(108, 117, 125); // Gray text
+    pdf.text(`Generated on: ${new Date().toLocaleString()}`, 15, finalY + 8);
+    pdf.text(`Record ID: ${entry._id?.substring(0, 8) || 'Unknown'}`, 15, finalY + 14);
+    
+    if (entry.userId) {
+      pdf.text(`Submitted by: ${entry.userId.name} (${entry.userId.occupation})`, 15, finalY + 20);
+    }
+    
+    pdf.text(`Submission Date: ${formatDate(entry.createdAt)}`, 15, finalY + 26);
+    
+    // Educational disclaimer
+    pdf.setFontSize(7);
+    pdf.text('This document is generated for educational purposes only.', pageWidth - 15, finalY + 8, { align: 'right' });
+    pdf.text('Clinical Data Educational Database', pageWidth - 15, finalY + 14, { align: 'right' });
+    
+    // Save the PDF
+    const fileName = `clinical-report-${entry.sex}-${entry.age}yr-${entry._id?.substring(0, 6) || Date.now()}.pdf`;
+    pdf.save(fileName);
   };
 
   // Format date string
@@ -122,9 +319,15 @@ const ClinicalAccess = () => {
       <header className="mb-4">
         <h1 className="display-6 fw-bold text-primary text-center">
           <FontAwesomeIcon icon={faHeartbeat} className="me-2" />
-          Clinical Data Access
+          Clinical Data Access - Educational Database
         </h1>
-        <p className="text-muted text-center">Access and analyze patient clinical records</p>
+        <p className="text-muted text-center">
+          Access community-shared clinical records for educational purposes
+        </p>
+        <div className="alert alert-info text-center" role="alert">
+          <i className="fas fa-graduation-cap me-2"></i>
+          <strong>Educational Resource:</strong> All clinical data is shared across the community for learning purposes
+        </div>
       </header>
       
       <div className="card shadow-sm border-0 mb-4">
@@ -254,11 +457,18 @@ const ClinicalAccess = () => {
                 <div className="card h-100 shadow-sm border-0 hover-shadow">
                   <div className="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center" 
                        style={{background: "linear-gradient(135deg, #0d6efd, #0a58ca)"}}>
-                    <h5 className="mb-0 fs-6">Patient Record</h5>
+                    <div>
+                      <h5 className="mb-0 fs-6">Patient Record</h5>
+                      {entry.userId && (
+                        <small className="opacity-75">
+                          Submitted by: {entry.userId.name} ({entry.userId.occupation})
+                        </small>
+                      )}
+                    </div>
                     <button 
                       className="btn btn-sm btn-light rounded-circle" 
                       onClick={() => handleDownload(entry)}
-                      title="Download data"
+                      title="Download PDF Report"
                     >
                       <FontAwesomeIcon icon={faDownload} />
                     </button>
@@ -444,6 +654,18 @@ const ClinicalAccess = () => {
                           <td className="fw-bold">Submitted On:</td>
                           <td>{formatDate(selectedRecord.createdAt)}</td>
                         </tr>
+                        {selectedRecord.userId && (
+                          <>
+                            <tr>
+                              <td className="fw-bold">Submitted By:</td>
+                              <td>{selectedRecord.userId.name}</td>
+                            </tr>
+                            <tr>
+                              <td className="fw-bold">Submitter Role:</td>
+                              <td className="text-capitalize">{selectedRecord.userId.occupation}</td>
+                            </tr>
+                          </>
+                        )}
                       </tbody>
                     </table>
                   </div>
@@ -602,7 +824,7 @@ const ClinicalAccess = () => {
                   onClick={() => handleDownload(selectedRecord)}
                 >
                   <FontAwesomeIcon icon={faDownload} className="me-2" />
-                  Download Record
+                  Download PDF Report
                 </button>
               </div>
             </div>
